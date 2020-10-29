@@ -1,0 +1,99 @@
+//버블정렬은 두수를 비교해서 큰수는 오른쪽 으로 이동시키는 방법을 이용한다. 작은수로부터 큰수로 순서 정렬
+
+//퀵정렬은 기준값을 찾고 기준값보다 작은 값들은 왼쪽, 큰 값은 오른쪽,,,나누고 이동하고 ...의 반복....재귀 사용
+class Main {
+  public static void Select(int[] n){
+
+    for ( int i = 0 ; i < n.length ; i++) {
+        int k = i;
+      for ( int j = i + 1 ; j < n.length ; j++) {
+        if (n[j]<n[k]) {
+          k = j;
+        }
+      }
+      int temp=n[i];
+      n[i]=n[k];
+      n[k]=temp;
+    }
+  }
+
+  public static void Insert(int[] n){
+
+    for (int i = 0 ; i < n.length ; i++) {
+
+      int temp = n[i];
+      int j = i - 1;
+
+      while(j>=0 && n[j] > temp){
+        n[j+1]=n[j];
+        j--;
+      }
+      n[j+1] = temp;
+    }
+  }
+
+  public static void Bubble(int[] n){
+    for (int i = 0 ; i < n.length-1 ; i++){
+      for (int j = 0 ; j < n.length-1-i ; j++){
+        if(n[j]>n[j+1]) {       //j =2   J+1 =3
+          int temp = n[j];
+          n[j] = n[j+1];
+          n[j+1] = temp;
+             for(int k = 0 ; k < n.length; k++) {
+              System.out.print(n[k]+" ");
+              }
+            System.out.println();
+        }
+      }
+    }
+  }
+
+  public static void Quick(int[] n, int start, int end){
+    int left = start;
+    int right = end;
+    int mid = n[(start+end)/2];//중앙값은  시작 + 끝 /2 
+
+    do{
+        while((n[left] < mid) && (left < end)){
+          left++;
+        }
+        while((mid < n[right]) && (right > start)){
+          right--;
+        }
+        if (left<=right) {
+          int temp = n[left];
+          n[left] = n[right];
+          n[right]= temp;
+          left++;
+          right--;
+        }
+    }while(left<right);
+
+    if(start<right){
+      Quick(n,start,right);
+    }
+    if(left<end){
+      Quick(n,left,end);
+    }
+  }
+
+  public static void print(int []n) {
+
+    for(int i = 0 ; i < n.length; i++) {
+      System.out.print(n[i]+" ");
+    }
+    System.out.println();
+  }
+
+  public static void main(String[] args) {
+
+    int[] m = {2,3,4,1,2};  //5개 
+
+    Bubble(m); // 버블정렬
+    //Quick(m,0,m.length-1); //퀵정렬
+    //Insert(m); //삽입정렬
+    //Select(m);   //선택정렬
+    print(m);
+
+  }
+}
